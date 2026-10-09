@@ -2,7 +2,7 @@
 .nav { height: 80px; }
 .brand { height: 80px; display: flex; align-items: center; overflow: hidden; padding: 0; }
 .brand-logo { height: 120px; width: auto; object-fit: contain; mix-blend-mode: multiply; transform: translateX(-5px); }
-.footer-brand .brand-logo { height: 70px; filter: brightness(0) invert(1); mix-blend-mode: normal; transform: none; margin-top: 5px; }
+.footer-brand .brand-logo { height: 70px; mix-blend-mode: normal; transform: none; margin-top: 5px; }
 .nav-links { gap: 32px; }
 .nav-links a { font-size: 14px; color: #334155; font-weight: 600; text-transform: none; letter-spacing: 0.3px; transition: all 0.2s ease; position: relative; padding-bottom: 4px; }
 .nav-links a:hover { color: #2563eb; }
