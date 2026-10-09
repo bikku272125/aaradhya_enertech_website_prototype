@@ -19,17 +19,18 @@ document.getElementById('contactForm')?.addEventListener('submit', async (e) => 
 
   try {
     const formData = new FormData(form);
-    const data = new URLSearchParams(formData).toString();
+    const data = Object.fromEntries(formData.entries());
     
-    await fetch('https://script.google.com/macros/s/AKfycbwjFbq-mBGkh9ZPQhqjS9f1MgWTW_hLanPomy8bYw5IrHW-5mo4WLma-3PCClFuFxNN/exec', {
+    await fetch('https://formsubmit.co/ajax/aaradhyaenertech2404@gmail.com', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
-      body: data
+      body: JSON.stringify(data)
     });
     
-    note.textContent = 'Success! Your enquiry has been saved to Google Sheets.';
+    note.textContent = 'Success! Your enquiry has been sent.';
     note.style.color = 'green';
     form.reset();
   } catch (err) {
