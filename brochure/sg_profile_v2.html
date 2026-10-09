@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Profile - SG Enterprises</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
+
+        :root {
+            --primary-blue: #1e3a8a; /* Deep blue similar to SG */
+            --accent-red: #dc2626; /* Red curve accent */
+            --light-blue: #bae6fd; /* Light blue curve background */
+            --text-dark: #1f2937;
+            --text-gray: #4b5563;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+
+        @media print {
+            body {
+                background: transparent;
+                margin: 0;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                height: 297mm;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 12pt;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* --- COVER PAGE STYLES --- */
+        .cover-left {
+            position: absolute;
+            left: -50px;
+            top: 50px;
+            width: 250px;
+            height: 800px;
+            background-color: var(--primary-blue);
+            border-radius: 0 500px 500px 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover-left-images {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: absolute;
+            left: 20px;
+        }
+
+        .cover-circle-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            background: white;
+        }
+
+        .cover-center {
+            position: absolute;
+            left: 220px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            z-index: 1;
+            padding: 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+            margin-top: 50px;
+        }
+
+        .cover-tagline-box {
+            border: 2px solid var(--primary-blue);
+            padding: 10px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .cover-tagline-box p {
+            margin: 5px 0;
+            font-weight: 700;
+            color: var(--accent-red);
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .cover-hindi {
+            color: var(--accent-red);
+            font-size: 18pt;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .cover-family {
+            width: 300px;
+            height: auto;
+            margin-top: auto;
+            margin-bottom: 60px;
+            z-index: 5;
+        }
+
+        .cover-right-top {
+            position: absolute;
+            right: -100px;
+            top: -50px;
+            width: 350px;
+            height: 350px;
+            background-color: var(--accent-red);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .cover-right-top-inner {
+            position: absolute;
+            right: -80px;
+            top: -30px;
+            width: 310px;
+            height: 310px;
+            border-radius: 50%;
+            background: url('images/brochure/transformer.png') center/cover;
+            border: 5px solid white;
+            z-index: 2;
+        }
+
+        .cover-right-bottom {
+            position: absolute;
+            right: -150px;
+            bottom: -50px;
+            width: 450px;
+            height: 450px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .cover-right-bottom-inner {
+            position: absolute;
+            right: -120px;
+            bottom: -30px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: url('images/brochure/solar_panel.png') center/cover;
+            border: 5px solid white;
+            z-index: 2;
+        }
+
+        .cover-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            z-index: 10;
+            border-top: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 8pt;
+            line-height: 1.4;
+        }
+
+        /* --- PAGE 2 STYLES --- */
+        .content-container {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .header-bar {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14pt;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .overview-text {
+            font-size: 10pt;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .vision-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 10pt;
+            line-height: 1.6;
+        }
+        .vision-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+        .vision-list li::before {
+            content: "❖";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+        }
+
+        .mission-section {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .mission-img {
+            width: 200px;
+            height: auto;
+            margin-right: 25px;
+        }
+        
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120pt;
+            font-weight: 800;
+            color: rgba(0,0,0,0.03);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- PAGE 3 & 4 STYLES --- */
+        .page-split {
+            display: flex;
+            height: 100%;
+        }
+        .col-left {
+            width: 45%;
+            padding: 30px;
+            box-sizing: border-box;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+        .col-right {
+            width: 55%;
+            padding: 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section-badge {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 0 25px 25px 0;
+            display: inline-block;
+            font-size: 14pt;
+            font-weight: 700;
+            margin: 25px 0 20px -30px; /* pull out to left edge */
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .values-chart {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            margin: 0 auto 30px auto;
+            display: block;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .photo-grid img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .photo-grid-large {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .photo-grid-large img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .tools-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 9.5pt;
+            list-style-type: square;
+            padding-left: 20px;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+        .tools-list li { margin-bottom: 4px; }
+
+        .tools-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 12pt;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9.5pt;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        table.data-table th {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 10px;
+            border: 1px solid var(--primary-blue);
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        table.data-table td {
+            padding: 8px 10px;
+            border: 1px solid #cbd5e1;
+            color: var(--text-dark);
+            background: white;
+        }
+        table.data-table tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        .clients-strip {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .clients-strip .client-logo {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 12pt;
+            border: 2px solid var(--primary-blue);
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-align: center;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+    <!-- Open Graph / Social Media Tags -->
+    <meta property="og:title" content="Aaradhya Enertech" />
+    <meta property="og:description" content="Professional Transformer Sales, Parts Supply, and Industrial Electrical Services in Jaipur, Rajasthan." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.aaradhyaenertech.com/" />
+</head>
+<body>
+
+    <button class="print-btn no-print" onclick="window.print()">Print to PDF</button>
+
+    <!-- PAGE 1: COVER -->
+    <div class="page">
+        <!-- Left Blue Curve -->
+        <div class="cover-left">
+            <div class="cover-left-images">
+                <img src="images/brochure/panel.png" class="cover-circle-img" alt="Panel">
+                <img src="images/brochure/manufacturing.png" class="cover-circle-img" alt="Manufacturing">
+                <img src="images/brochure/director.png" class="cover-circle-img" style="object-fit: contain; background: white;" alt="Metering">
+            </div>
+        </div>
+        
+        <!-- Right Top Red Curve -->
+        <div class="cover-right-top"></div>
+        <div class="cover-right-top-inner"></div>
+
+        <!-- Right Bottom Blue Curve -->
+        <div class="cover-right-bottom"></div>
+        <div class="cover-right-bottom-inner"></div>
+
+        <!-- Center Content -->
+        <div class="cover-center">
+            <img src="images/brochure/sg_logo.png" alt="Logo" class="cover-logo">
+            
+            <div class="cover-tagline-box">
+                <p>TOGETHER in Journey</p>
+                <p>Together in GROWTH</p>
+            </div>
+            
+            <div class="cover-hindi">
+                एक नए रिश्ते की शुरुआत
+            </div>
+            
+            <img src="images/brochure/cover_family.png" alt="Happy Family" class="cover-family">
+        </div>
+
+        <div class="cover-footer">
+            <strong style="color: var(--primary-blue); font-size: 9pt;">Power Distribution, Substation, Solar & Metering Project (Turnkey Basis)</strong>
+            <span>Head Office : Laxmi Tower, 5th Floor, Station Road, Deoghar (Jharkhand)-814112.</span>
+            <span>Email : sgenterprises66@gmail.com, info@sgenterprisessolar.com</span>
+            <span>Website : www.sgenterprisessolar.com | Contact No.: +91 7004994974, 8637814027</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: OVERVIEW, VISION, MISSION -->
+    <div class="page" style="background: url('images/brochure/manufacturing.png') no-repeat top center; background-size: 100% 250px;">
+        <div style="height: 250px;"></div> <!-- Spacer for top image -->
+        
+        <div class="content-container" style="position: relative; z-index: 2; background: white; margin-top: -30px; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); height: calc(100% - 220px); padding: 30px 40px;">
+            <div class="watermark">AE</div>
+            
+            <div style="z-index: 5; position: relative;">
+                <div class="header-bar" style="background-color: var(--primary-blue);">Overview</div>
+                <div class="overview-text">
+                    <strong>Established in 2007</strong>, <em>S.G Enterprises</em> is an aspiring player in the repairing and manufacturing of distribution and power transformers. The company is registered with MSME and has the entire infrastructure to repair & manufacture Transformers up to 10MVA and voltage class of 11KV, 22KV, 33KV. The manufacturing is in accordance with the strict quality assurance procedure which meets all national standards.<br><br>
+                    We have ISO certified 9001-2015 and 14001-2015 & empanelment as a channel partner for grid-connected rooftop & Small solar power plants program of Ministry of new and renewable energy.<br>
+                    We have enlisted a vendor for supply APL & BPL Kit. Also empanelled as a turnkey contractor under Jharkhand Discom.
+                </div>
+
+                <div class="header-bar" style="background-color: var(--primary-blue);">Vision</div>
+                <ul class="vision-list">
+                    <li>Committed to providing highest quality products, competitively price with services exceeding our customer expectations.</li>
+                    <li>We will continue to invest in facilities, systems & highly technical personnel providing added value to our business relationships.</li>
+                    <li>Being honest with our clients.</li>
+                    <li>Encouraging alternative form of energy generations.</li>
+                    <li>Promoting health & Wellbeing of our clients, our staff & our environment.</li>
+                    <li>To be a world-class construction and infrastructure enterprise committed to quality, timely completion, customer satisfaction.</li>
+                </ul>
+
+                <div class="mission-section">
+                    <div style="width: 100%;">
+                        <div class="header-bar" style="background-color: var(--accent-red);">Mission :</div>
+                        <ul class="vision-list">
+                            <li>Deliver on our promises.</li>
+                            <li>Provides quality customer service & advice.</li>
+                            <li>Guarantee safe, Consistent, Economical, Innovative, Electrical Solutions to all our clients.</li>
+                            <li>To adopt the latest technologies in the field of engineering, construction, operation and maintenance of infrastructure projects.</li>
+                            <li>To encourage innovation, professional integrity, up gradation of knowledge and skills of employees and a safe working environment.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 5: SG Enterprises Products & Range -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 30px;">
+            <h1 style="color: var(--primary-blue); margin-top: 0; font-size: 26pt; border-bottom: 3px solid var(--accent-red); padding-bottom: 12px; font-family: 'Montserrat', sans-serif;">SG Enterprises Products & Range</h1>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
+                <!-- Product 1 -->
+                <div style="display: flex; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); align-items: center;">
+                    <div style="flex: 1; padding-right: 25px;">
+                        <h2 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif;">Power Transformer <span style="color: var(--accent-red); font-size: 12pt; display: block; margin-top: 5px;">(3.15 MVA to 5 MVA - 33 KV)</span></h2>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.6; margin: 0; color: var(--text-dark);">A power transformer is used primarily to couple electrical energy from a power supply line to a circuit system, or to one or more components of the system. A power transformer used with solid state circuits is called a rectifier transformer. The rating is given in terms of the secondary's maximum voltage and current-delivering capacity.</p>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.6; margin: 10px 0 0 0; color: var(--text-dark);">Power transformers above 5 MVA are used in Boards Substations, while ratings up to 6.3 MVA are used in various heavy load applications including <strong>Industry, Hospitals, Railways, Refineries, and Substations</strong>. These are custom-built for specific power distribution requirements.</p>
+                    </div>
+                    <img src="images/brochure/transformer.png" style="width: 170px; height: 170px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                </div>
+
+                <!-- Product 2 -->
+                <div style="display: flex; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); align-items: center;">
+                    <img src="images/brochure/transformer.png" style="width: 170px; height: 170px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-right: 25px;">
+                    <div style="flex: 1;">
+                        <h2 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif;">Distribution Transformer <span style="color: var(--accent-red); font-size: 12pt; display: block; margin-top: 5px;">(5 KVA to 2500 KVA)</span></h2>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.6; margin: 0; color: var(--text-dark);">A transformer transfers electrical energy from one circuit to another without changing the <strong>frequency</strong>. Transformers are used to meet a wide variety of needs by increasing or decreasing AC voltage. Up to 100 KVA transformers are mainly used in electricity boards & electrification of various government schemes. Other ratings are widely used in Industries, Hospitals, Colleges, Highways, and Refineries.</p>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div style="display: flex; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); align-items: center;">
+                    <div style="flex: 1; padding-right: 25px;">
+                        <h2 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif;">LT Transformers <span style="color: var(--accent-red); font-size: 12pt; display: block; margin-top: 5px;">(Up to 1.1 KV)</span></h2>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.6; margin: 0; color: var(--text-dark);">Three-phase or single-phase dry-type low voltage (LV) transformers are used as isolation transformers or to adjust voltage levels in the LV distribution grid. Windings are made of aluminium or copper and impregnated with epoxy resin via VPI.</p>
+                        <ul class="tools-list" style="grid-template-columns: 1fr 1fr; margin-top: 12px; margin-bottom: 0; font-size: 8.5pt;">
+                            <li>Wind or photovoltaics</li>
+                            <li>Transportation (marine/rail)</li>
+                            <li>Uninterruptible Power Supply (UPS)</li>
+                            <li>Chemical, oil and gas industry</li>
+                        </ul>
+                    </div>
+                    <img src="images/brochure/panel.png" style="width: 170px; height: 170px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+
+            <!-- Specs Bottom -->
+            <div style="background: var(--primary-blue); color: white; padding: 20px; border-radius: 12px; margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                <div style="font-size: 9pt;">
+                    <div style="margin-bottom: 10px;"><strong>Rated Power:</strong> 10 KVA to 1000 KVA (Other on request)</div>
+                    <div style="margin-bottom: 10px;"><strong>No. of Phase:</strong> 3 or 1</div>
+                    <div style="margin-bottom: 10px;"><strong>Primary/Secondary Voltage:</strong><br>220, 230, 240, 380, 400, 415, 433, 600, 690 Volts</div>
+                    <div><strong>Frequency:</strong> 50, 60 Hz</div>
+                </div>
+                <div style="font-size: 9pt;">
+                    <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                        <li>Low losses & low weight</li>
+                        <li>Compact dimensions</li>
+                        <li>Non-flammable and non-explosive</li>
+                        <li>IP23 enclosures (optional)</li>
+                        <li>Natural convection (AN) or forced air (AF) cooling</li>
+                        <li>Built in accordance with IS, IEC and EN standards</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 5B: Dry Type Transformer -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 30px;">
+            <h1 style="color: var(--primary-blue); margin-top: 0; font-size: 26pt; border-bottom: 3px solid var(--accent-red); padding-bottom: 12px; font-family: 'Montserrat', sans-serif;">SG Enterprises Products & Range</h1>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
+                <!-- Product 1 -->
+                <div style="display: flex; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); align-items: center;">
+                    <img src="images/brochure/cast_resin_original.png" style="width: 170px; height: 170px; object-fit: cover; object-position: top; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-right: 25px; background: white;">
+                    <div style="flex: 1;">
+                        <h2 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif;">Dry Type Transformer <span style="color: var(--accent-red); font-size: 12pt; display: block; margin-top: 5px;">(100 KVA to 2.5 MVA) - up to 33 KV</span></h2>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.6; margin: 0; color: var(--text-dark);">Cast resin dry type transformer (CRT) is used in high moisture prone areas. Its primary and secondary windings are encapsulated with epoxy resin. Complete protection is achieved by this best resin encapsulation so that the transformer can work without disruption in highly moisture prone areas. Thus this transformer is non hygroscopic. Available in ratings from 100 KVA to 2500 KVA with insulation class F.</p>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div style="display: flex; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); align-items: center;">
+                    <div style="flex: 1; padding-right: 25px;">
+                        <h2 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif;">Cast Resin Dry Type Transformer (CRT)</h2>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.6; margin: 0; color: var(--text-dark);">Better overload capacity. Low partial discharge along with low losses. Hence efficiency is very good. As it is with non inflammable winding insulation, it offers zero risk to fire hazard. So it is suitable for indoor installation. Can be fitted outdoor in IP 45 enclosure. And of course non hygroscopic.</p>
+                        
+                        <h3 style="color: var(--primary-blue); font-size: 11pt; margin: 15px 0 5px 0;">Advantages:</h3>
+                        <ul class="tools-list" style="grid-template-columns: 1fr 1fr; margin-top: 5px; margin-bottom: 0; font-size: 8.5pt;">
+                            <li>Safety for people and property</li>
+                            <li>Maintenance and pollution-free</li>
+                            <li>Easy installation</li>
+                            <li>Environmentally friendly</li>
+                            <li>Excellent capacity to support overloads</li>
+                            <li>Reduced cost on civil works</li>
+                            <li>Excellent resistance to short circuit</li>
+                        </ul>
+                    </div>
+                    <img src="images/brochure/cast_resin_original.png" style="width: 170px; height: 170px; object-fit: cover; object-position: bottom; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); background: white;">
+                </div>
+
+                <!-- Product 3: VPI -->
+                <div style="display: flex; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); align-items: center;">
+                    <div style="flex: 1;">
+                        <h2 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif;">Vacuum Pressure Impregnated (VPI)</h2>
+                        <ul class="tools-list" style="grid-template-columns: 1fr 1fr; margin-top: 5px; margin-bottom: 0; font-size: 9pt;">
+                            <li>High mechanical strength</li>
+                            <li>Void free insulation</li>
+                            <li>No temperature fluctuation</li>
+                            <li>Easy maintenance</li>
+                            <li>Less prone to fire hazard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specs Bottom -->
+            <div style="background: var(--primary-blue); color: white; padding: 20px; border-radius: 12px; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h3 style="color: white; margin: 0 0 10px 0; font-size: 11pt; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;">Disadvantages of Dry Type</h3>
+                        <p style="font-size: 8.5pt; line-height: 1.5; margin: 0;">Dry type transformer is long lasting with less chance of winding failure. But once it fails whole set up is to changed. For same power and voltage rating, dry type is costlier than oil cooled transformer.</p>
+                    </div>
+                    <div>
+                        <h3 style="color: white; margin: 0 0 10px 0; font-size: 11pt; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;">Application Areas</h3>
+                        <ul style="font-size: 8.5pt; margin: 0; padding-left: 20px; line-height: 1.5;">
+                            <li>Chemical, oil and gas industry</li>
+                            <li>Environment sensitive areas (water protection)</li>
+                            <li>Fire-risk areas (e.g. forests)</li>
+                            <li>Inner-city substations</li>
+                            <li>Indoor and underground substations</li>
+                            <li>Renewable generation (off-shore wind)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- PAGE 5C: Manufacturing Stage (Part 1) -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column;">
+            <h1 style="color: var(--primary-blue); margin-top: 0; font-size: 30pt; border-bottom: 3px solid var(--accent-red); padding-bottom: 15px; font-family: 'Montserrat', sans-serif;">The Manufacturing Stage Of Transformer</h1>
+            
+            <div style="display: flex; flex-direction: column; gap: 30px; margin-top: 25px; flex: 1; justify-content: space-around;">
+                <!-- Stage 1 -->
+                <div style="display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                    <div style="flex: 1; padding-right: 25px;">
+                        <h2 style="color: var(--accent-red); margin: 0 0 10px 0; font-size: 16pt; font-family: 'Montserrat', sans-serif; font-style: italic;">Core Assembly</h2>
+                        <p style="font-size: 9.5pt; text-align: justify; line-height: 1.5; margin: 0; color: var(--text-dark);">The magnetic core of the transformer is built-up of cold rolled grain oriented (CRGO) steel lamination. Hi-B grade & laser scribed lamination is used to reduce the no load losses & noise level of transformer. Lamination are cut at an angle of 45 Deg, Core Leg & Core yoke laminations are interleaved in mitred joints in order to facilitate the passage of magnetic flux & to avoid hotspots & reduce No Load Losses, No Load current & noise level.</p>
+                    </div>
+                    <img src="images/brochure/core_assembly.png" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                </div>
+
+                <!-- Stage 2 -->
+                <div style="display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                    <div style="flex: 1; padding-right: 25px;">
+                        <h2 style="color: var(--accent-red); margin: 0 0 10px 0; font-size: 16pt; font-family: 'Montserrat', sans-serif; font-style: italic;">Coil Winding</h2>
+                        <p style="font-size: 9.5pt; text-align: justify; line-height: 1.5; margin: 0; color: var(--text-dark);">The windings are designed to optimize dynamic, thermal, mechanical & electrical stresses depending upon the current & voltage requirements. Spiral crossover, Helical continuous disc, Fully or partly interleaved winding are used depending on the specific design criteria. The winding machines are equipped with hydraulic break system which ensures the proper tension is maintained during the winding. Dovetailed key spacers are employed to give the extra strength to the winding.</p>
+                    </div>
+                    <img src="images/brochure/coil_winding.png" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex-shrink: 0;">
+                </div>
+
+                <!-- Stage 3 -->
+                <div style="display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                    <div style="flex: 1; padding-right: 25px;">
+                        <h2 style="color: var(--accent-red); margin: 0 0 10px 0; font-size: 16pt; font-family: 'Montserrat', sans-serif; font-style: italic;">Core Coil Assembly</h2>
+                        <p style="font-size: 9.5pt; text-align: justify; line-height: 1.5; margin: 0; color: var(--text-dark);">The magnetic core with the windings and some accessories fitted together forms the active part of the transformer. The windings are slipped over the core legs & laminations of the upper yoke are interleaved. All connections between windings and bushings & tappings to tap changer are made. The tap changer allows the increase or decrease of a certain no of turns in the high voltage winding in order to compensate for a voltage drop or to adopt the transformer to an unstable supply.</p>
+                    </div>
+                    <img src="images/brochure/core_coil_assembly.png" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex-shrink: 0;">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PAGE 5C-2: Manufacturing Stage (Part 2) -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column;">
+            
+            <div style="display: flex; flex-direction: column; gap: 30px;">
+                <!-- Stage 4 -->
+                <div style="display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                    <div style="flex: 1; padding-right: 20px;">
+                        <h2 style="color: var(--accent-red); margin: 0 0 8px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif; font-style: italic;">Drying/ Ovening</h2>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.5; margin: 0; color: var(--text-dark);">A transformer may contain no trace of humidity; otherwise there will be a danger of flash over within the windings. The active part of transformer is completely dried before transformer is filled with transformer oil under vacuum. The tank with active part in it, is connected to an oil supply and placed inside a vacuum chamber.</p>
+                    </div>
+                    <img src="images/brochure/ovening.png" style="width: 130px; height: 130px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1;">
+                </div>
+
+                <!-- Stage 5 -->
+                <div style="display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                    <div style="flex: 1; padding-right: 20px;">
+                        <h2 style="color: var(--accent-red); margin: 0 0 8px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif; font-style: italic;">Tank/ Tanking</h2>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.5; margin: 0; color: var(--text-dark);">Our tank design is fully computerized. The computer determines the optimum size and the number and location of required tank supports. The objective is to reduce the tank size and weight as much as possible, which facilitates easier handling, transportation, assembly and installation on site. All metal parts are grit blast cleaned to remove weld splatter.</p>
+                    </div>
+                    <img src="images/brochure/tanking.png" style="width: 130px; height: 130px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1;">
+                </div>
+
+                <!-- Stage 6 -->
+                <div style="display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                    <div style="flex: 1; padding-right: 20px;">
+                        <h2 style="color: var(--accent-red); margin: 0 0 8px 0; font-size: 15pt; font-family: 'Montserrat', sans-serif; font-style: italic;">Surface Treatment & Painting</h2>
+                        <p style="font-size: 9pt; text-align: justify; line-height: 1.5; margin: 0; color: var(--text-dark);">We use satisfactory protection against corrosion & rusting, all surfaces of steel parts are shot blasted in compliance with Swedish Standard SIS 055900 to Sa 2.5 quality prior to painting. Thereafter tanks and steel parts are painted with one primer and two final coats.</p>
+                    </div>
+                    <img src="images/brochure/painting.png" style="width: 130px; height: 130px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1;">
+                </div>
+            </div>
+            
+            <!-- Standards Section -->
+            <div style="background: var(--primary-blue); color: white; padding: 25px; border-radius: 12px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                <h2 style="color: white; margin: 0 0 15px 0; font-size: 16pt; border-bottom: 2px solid var(--accent-red); padding-bottom: 10px; font-family: 'Montserrat', sans-serif;">Transformers are designed and tested to the following standards</h2>
+                
+                <ul style="font-size: 9.5pt; line-height: 1.6; margin: 0 0 15px 0; padding-left: 20px;">
+                    <li><strong>Distribution and power transformers:</strong> IS: 1180-2014, 2026, BS: 171, IEC: 76 & OES</li>
+                    <li><strong>Convertor transformers:</strong> IS: 4540, IEC: 146 & IEEE: 444</li>
+                    <li><strong>Furnace transformers:</strong> IS: 2026</li>
+                    <li><strong>System earthing transformers:</strong> IS: 3150 & BS: 4944</li>
+                    <li><strong>Dry Type Transformer:</strong> IS 11171, IEC 60726, ANSI, NEMA, and Indian Standard.</li>
+                    <li><strong>Low Voltage Control Panel:</strong> IS 8623 (Part), IEC Pub 439 - 3, IEC 61439</li>
+                </ul>
+                
+                <p style="font-size: 9pt; text-align: justify; line-height: 1.5; margin: 0;">The company is capable of manufacturing transformers to any other standards as per customer/consultant requirements. The cast resin dry-type transformers are designed and tested to comply with national & international standards. We can develop units with any voltage combination, tap arrangements, winding options, and enclosure types.</p>
+            </div>
+        </div>
+    </div>
+<!-- PAGE 5F: Testing -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <h1 style="color: var(--primary-blue); margin-top: 0; font-size: 28pt; border-bottom: 3px solid var(--accent-red); padding-bottom: 12px; font-family: 'Montserrat', sans-serif;">Testing</h1>
+            
+            <div style="width: 100%; height: 250px; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 10px;">
+                <img src="images/brochure/testing_panel.png" style="width: 100%; margin-top: -85px;">
+            </div>
+
+            <p style="font-size: 9pt; text-align: justify; line-height: 1.6; margin: 0 0 15px 0; color: var(--text-dark);">
+                All transformers are subject to all routine tests in our sophisticated laboratory at the factory, confirming to the latest national and international standard specifications. Tests are intended for the basic validation of design & basis for performance, safety & reliability of the transformers. SG Enterprises is equipped with adequate digital precision meters such as the digital power analyser, WT-300 (latest) of Yokogawa of Japan make, which are used for measuring the load losses, impedance voltage, no load losses & no load currents.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 20px; flex: 1;">
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                    <h2 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 13pt; font-family: 'Montserrat', sans-serif;">In-House Routine Tests</h2>
+                    <ul class="tools-list" style="display: grid; grid-template-columns: 1fr 1fr; margin: 0; font-size: 9.5pt; gap: 8px; line-height: 1.5; padding-left: 20px;">
+                        <li>Insulation Resistance Test</li>
+                        <li>Resistance measurement of winding</li>
+                        <li>Turn ratio Test</li>
+                        <li>Polarity and phase sequence test</li>
+                        <li>No load losses & Impedance voltage test</li>
+                        <li>Load loss measurement</li>
+                        <li>Insulation of oil test</li>
+                        <li>Dielectric test</li>
+                        <li>Leakage test of transformer tank</li>
+                        <li>Temperature rise test</li>
+                    </ul>
+                </div>
+                
+                <div style="background: var(--primary-blue); color: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
+                    <h2 style="color: white; margin: 0 0 8px 0; font-size: 13pt; font-family: 'Montserrat', sans-serif;">Type Tests (Optional)</h2>
+                    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.5; margin: 0;">Type tests are special optional tests carried out at an additional application fee to be borne by the customer. These tests are: <strong>Impulse Voltage Test</strong> and <strong>Short Circuit Test</strong>.</p>
+                </div>
+
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); flex: 1;">
+                    <h2 style="color: var(--accent-red); margin: 0 0 8px 0; font-size: 13pt; font-family: 'Montserrat', sans-serif;">9001:2015 Quality System</h2>
+                    <p style="font-size: 9pt; text-align: justify; line-height: 1.5; margin: 0; color: var(--text-dark);">Our products are designed, manufactured & supplied under TQM system. We continually strive to improve the quality & competency of our products and services. We follow quality control across different stages of the manufacturing process through a dedicated QA team. We comply with all testing facilities in-house to ensure products are made as per customer norms. We have state-of-the-art testing facilities up to 10000 KVA & 33KV.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- PAGE 3: VALUES, DIVISIONS, INFRASTRUCTURE -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 35px; padding-bottom: 35px; display: flex; flex-direction: column; gap: 20px; height: 100%;">
+            
+            <!-- Top Section: Values and Divisions (Side by side) -->
+            <div style="display: flex; gap: 20px;">
+                
+                <!-- Corporate Values -->
+                <div style="flex: 1; background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <img src="images/brochure/values_chart.png" alt="Values" style="max-width: 100%; object-fit: contain;">
+                </div>
+                
+                <!-- Division (Removed by user request) -->
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 15px;">
+                    
+                    <div style="background: var(--primary-blue); color: white; border-radius: 12px; padding: 12px 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 5px;">
+                        <h2 style="margin: 0; font-size: 15pt; font-family: 'Montserrat', sans-serif;">Electrical</h2>
+                    </div>
+                    <div style="margin-top: 0;">
+                        <img src="images/brochure/electrical_collage.jpg" alt="Electrical Operations" style="border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); width: 100%; max-height: 280px; object-fit: contain; display: block; margin: 0 auto;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Infrastructure & Tools -->
+            <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                
+                <h2 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 14pt; border-bottom: 2px solid var(--accent-red); padding-bottom: 8px; font-family: 'Montserrat', sans-serif;">Infrastructure & Capabilities</h2>
+                
+                <ul style="font-size: 9.5pt; color: var(--text-dark); margin: 0 0 15px 0; padding-left: 20px; line-height: 1.5;">
+                    <li>Power Transformer & Distribution Transformer Repairing & Manufacturing unit.</li>
+                    <li>State-of-the-art Testing Lab facility.</li>
+                </ul>
+
+                <h3 style="color: var(--accent-red); margin: 5px 0 12px 0; font-size: 12pt; font-family: 'Montserrat', sans-serif;">Tools & Tackles in Transformer Plant</h3>
+                
+                <ul class="tools-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; padding: 0; list-style-type: none; font-size: 7.5pt; line-height: 1.3;">
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> crane 5-10 ton</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Digital Multi meter Dual display 1000v AC/DC</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> NTPL, OTMT 100s Motorised oil test set</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Eltel TRM-100 Transformer ratio meter</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Power Analyser</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> 100 A variacs motorised without oil</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Insulation Tester</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Thermometer Digital</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Panel Meter Digital</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Motor Generator set 10-20 hp</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Booster Transformer</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> High voltage testing set</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Resistance meter</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Testing Panel with meter</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> HT Machine</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> LT Machine</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Paper cutting machine</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Butt wielding machine</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Coil formers</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Heating Chamber</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Hydraulic 2.5 Tonne Pallet truck</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Wielding Machine oil field</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Sheet bending machine</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Drill Machine</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Vice & Bench</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Bench grinder</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Compressor Machine</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> Cut off Machine</li>
+                    <li style="position: relative; padding-left: 12px;"><span style="color: var(--accent-red); position: absolute; left: 0; top: 0;">▪</span> 2 MT Chain pulley</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <!-- PAGE 4: TOOLS, PROJECTS, TURNOVER -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 35px; padding-bottom: 35px; display: flex; flex-direction: column; gap: 20px; height: 100%;">
+            
+            <!-- Top Row: Fabrication Tools & Consultants -->
+            <div style="display: flex; gap: 20px;">
+                <!-- Fabrication Tools -->
+                <div style="flex: 1; background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
+                    <h2 style="color: var(--accent-red); margin: 0 0 15px 0; font-size: 14pt; border-bottom: 2px solid var(--accent-red); padding-bottom: 8px; font-family: 'Montserrat', sans-serif;">Tools & Tackles in Corrugation Plant</h2>
+                    <ul style="list-style-type: none; padding: 0; margin: 0; font-size: 8.5pt; line-height: 1.5; color: var(--text-dark);">
+                        <li style="position: relative; padding-left: 14px; margin-bottom: 8px;"><span style="color: var(--accent-red); position: absolute; left: 0;">▪</span> Nagpal heavy duty speed oblique type single facer paper corrugating machine complete with reel stand self-hydraulic - finger type</li>
+                        <li style="position: relative; padding-left: 14px; margin-bottom: 8px;"><span style="color: var(--accent-red); position: absolute; left: 0;">▪</span> Nagpal sheet cutter gear model</li>
+                        <li style="position: relative; padding-left: 14px; margin-bottom: 8px;"><span style="color: var(--accent-red); position: absolute; left: 0;">▪</span> Nagpal sheet pasting machine</li>
+                        <li style="position: relative; padding-left: 14px; margin-bottom: 8px;"><span style="color: var(--accent-red); position: absolute; left: 0;">▪</span> Nagpal 4 bar rotary creasing and cutting machine</li>
+                        <li style="position: relative; padding-left: 14px; margin-bottom: 8px;"><span style="color: var(--accent-red); position: absolute; left: 0;">▪</span> Nagpal Eccentric slotter</li>
+                        <li style="position: relative; padding-left: 14px; margin-bottom: 8px;"><span style="color: var(--accent-red); position: absolute; left: 0;">▪</span> Nagpal Box stitching</li>
+                        <li style="position: relative; padding-left: 14px; margin-bottom: 8px;"><span style="color: var(--accent-red); position: absolute; left: 0;">▪</span> Board Cutter</li>
+                    </ul>
+                </div>
+                
+                <!-- Consultants -->
+                <div style="flex: 1; background: #e0f2fe; border-radius: 12px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #bae6fd; display: flex; flex-direction: column;">
+                    <h2 style="color: var(--primary-blue); margin: 0 0 15px 0; font-size: 14pt; border-bottom: 2px solid var(--primary-blue); padding-bottom: 8px; font-family: 'Montserrat', sans-serif;">Our Consultant</h2>
+                    <ul style="list-style-type: decimal; padding-left: 18px; margin: 0; font-size: 9pt; line-height: 1.6; color: var(--primary-blue); font-weight: 500;">
+                        <li>Mr. S.C. Srivastava - Retired Chief Engineer, JBVNL</li>
+                        <li>Mr. Sunil Kumar - Retired Electrical Exec. Engineer, JBVNL</li>
+                        <li>Mr. Alok Kumar - Mechanical Engineer, BIT Meshra</li>
+                        <li>Mr. K.P. Singh - Retired Chief Exec. Engineer, JBVNL</li>
+                        <li>S.T. Choudhury - Retired Deputy Director personal, JSEB</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Middle Row: Projects Table (Full width) -->
+            <div style="background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; overflow: hidden; flex: 1; display: flex; flex-direction: column;">
+                <div style="background: var(--primary-blue); padding: 12px 25px;">
+                    <h2 style="color: white; margin: 0; font-size: 15pt; font-family: 'Montserrat', sans-serif;">Our Projects</h2>
+                </div>
+                <div style="padding: 15px 20px;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 7.5pt; text-align: left;">
+                        <thead>
+                            <tr>
+                                <th style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 8px; text-align: center; width: 40px; color: var(--primary-blue);">SL.No</th>
+                                <th style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 8px; color: var(--primary-blue);">Work Description</th>
+                                <th style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 8px; text-align: center; width: 60px; color: var(--primary-blue);">Value in<br>Lakh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center;">1</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; line-height: 1.4;">We have experience of more than 10 + years in TRW (Transformer repair Workshop of JBVNL erstwhile JSEB) in Deoghar. 2008 to 2017</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center; font-weight: bold;">195</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center;">2</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; line-height: 1.4;">Village electrification work with KEC International in Deoghar district under RGGVY 11th Plan Scheme from 2008 to 2010</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center; font-weight: bold;">7</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center;">3</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; line-height: 1.4;">Executed 33kV Line from 132/33 Grid DVC Bishunpur to 33/11kV PSS Telaiya Basti near Sai factory in Hazaribagh Area Board under JBVNL under ADP Scheme.</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center; font-weight: bold;">8</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center;">4</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; line-height: 1.4;">Manufacturing, testing, supply, installation & commissioning of Grid Connected Rooftop SPV Plant of different capacities including 5 years maintenance on year 2018</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center; font-weight: bold;">42</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center;">5</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; line-height: 1.4;">Manufacturing, testing, supply, installation & commissioning including 5 years comprehensive maintenance contract of 200 nos solar lighting system with lithium Ferro phosphate battery under solar photovoltaic programme on turnkey basis</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center; font-weight: bold;">32</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center;">6</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; line-height: 1.4;">Village electrification work with NCC Limited in Dumka district under DDUGJY Scheme from 2017 to 2018</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center; font-weight: bold;">5</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center;">7</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; line-height: 1.4;">Executed 40000 Nos New Service Connection work under Soubhagya Scheme as turnkey basis in Garhwa, Chaibasa & Khunti District from 2018 to 2020</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center; font-weight: bold;">1200</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center;">8</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; line-height: 1.4;">Executed 5000 Nos Un meter to Meter Service Connection work under JSBAY Scheme as Partial turnkey basis in Hazaribagh & Chaibasa District from 2018 to 2020</td>
+                                <td style="border: 1px solid #e2e8f0; padding: 6px; text-align: center; font-weight: bold;">92</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bottom Row: Turnover and Clients -->
+            <div style="display: flex; gap: 20px;">
+                <!-- Turnover -->
+                <div style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="background: var(--primary-blue); padding: 12px 25px;">
+                        <h2 style="color: white; margin: 0; font-size: 14pt; font-family: 'Montserrat', sans-serif; text-align: center;">Our Turnover</h2>
+                    </div>
+                    <div style="padding: 15px 20px; flex: 1; display: flex; align-items: center;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 9pt; text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px; color: var(--primary-blue);">SL. No</th>
+                                    <th style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px; color: var(--primary-blue);">Year</th>
+                                    <th style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px; color: var(--primary-blue);">Value in Cr.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px;">1</td>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px;">FY-2018-19</td>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px; font-weight: bold;">1.08</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px;">2</td>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px;">FY-2019-20</td>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px; font-weight: bold;">2.92</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px;">3</td>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px;">FY-2020-21</td>
+                                    <td style="border: 1px solid #e2e8f0; padding: 10px; font-weight: bold;">5.85</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Clients -->
+                <div style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="background: var(--primary-blue); padding: 12px 25px;">
+                        <h2 style="color: white; margin: 0; font-size: 14pt; font-family: 'Montserrat', sans-serif; text-align: center;">Our Clients</h2>
+                    </div>
+                    <div style="padding: 15px; flex: 1; display: flex; justify-content: center; align-items: center;">
+                        <img src="images/brochure/clients_collage_clean.png" alt="Our Clients" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+        <!-- PAGE 5G: Technical Data -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column;">
+            <h1 style="color: var(--primary-blue); margin-top: 0; font-size: 28pt; border-bottom: 3px solid var(--accent-red); padding-bottom: 12px; font-family: 'Montserrat', sans-serif;">Transformer Technical Data</h1>
+            
+            <p style="font-size: 9.5pt; text-align: justify; line-height: 1.6; margin: 20px 0 30px 0; color: var(--text-dark);">
+                SG Enterprises transformers are manufactured in accordance to IS 1180 & IEC 76 for temperature rise, dielectric test & insulation level. The overload withstand capacity of the transformer is as per IEC 354. Tolerances applicable for no load loss, total losses, impedance voltage & voltage ratio are in accordance to IS 1180 & IEC 76. Tapping ratio for standard transformer high voltage winding variation is as per client equipment. Distribution Transformers are with oil natural, air natural cooling wound with copper conductor. The transformers are supplied both with pressed steel radiators and with corrugated tanks.
+            </p>
+
+            <h2 style="color: var(--primary-blue); margin: 0 0 15px 0; font-size: 13pt; text-align: center; font-family: 'Montserrat', sans-serif;">SPECIFICATIONS OF DISTRIBUTION TRANSFORMER ACCORDING TO IS - 1180 (2014-Part-1)</h2>
+
+            <div style="background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #e2e8f0;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 8.5pt; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th colspan="7" style="background: var(--primary-blue); color: white; padding: 12px; font-size: 11pt; border-bottom: 1px solid white;">Maximum Total Losses Upto 11 kV Class Transformers</th>
+                        </tr>
+                        <tr>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 8px; width: 60px;">Sl No.</th>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 8px;">Rating<br>(kVA)</th>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 8px;">Impedance<br>Z%</th>
+                            <th colspan="4" style="background: #f1f5f9; border-bottom: 1px solid #e2e8f0; padding: 8px;">Maximum Total Loss (W) AS PER IS - 1180-2014-PART-1</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">Energy Efficiency Level-1</th>
+                            <th colspan="2" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 6px;">Energy Efficiency Level-2</th>
+                        </tr>
+                        <tr>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">50% Load</th>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">100% Load</th>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">50% Load</th>
+                            <th style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 6px;">100% Load</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">1</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">16</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">155</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">440</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">120</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">400</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">2</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">190</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">635</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">175</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">595</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">3</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">63</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">340</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">1140</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">300</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">1050</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">100</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">475</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">1650</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">439</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">1500</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">5</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">160</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">670</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">1950</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">570</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">1700</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">6</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">200</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">780</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">2300</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">670</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">2100</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">7</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">250</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">980</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">2930</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">920</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">2700</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">8</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">315</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">1025</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">3100</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">955</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">2750</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">9</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">400</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">1225</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">3450</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">1150</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">3330</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">10</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">500</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">1510</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">4300</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">1430</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">4100</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">11</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">630</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">1860</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">5300</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">1745</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">4850</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">12</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">800</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">2287</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">6402</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">2147</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">5837</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">13</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">1000</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">9.00</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">2790</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">7700</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">2620</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">7000</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">14</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">1250</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">5.00</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">5300</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">9200</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">3220</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">8400</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">15</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">1600</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">4200</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">11800</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">3970</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">11300</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">16</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">2000</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">5050</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">15000</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">4790</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">14100</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">17</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">2500</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa;">6150</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px; background: #fafafa; font-weight: bold;">18500</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 6px;">5900</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 6px; font-weight: bold;">17500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- PAGE 5H: Technical Data (Cont.) -->
+    <div class="page">
+        <div class="content-container" style="padding-top: 30px; padding-bottom: 30px; display: flex; flex-direction: column; justify-content: space-between;">
+            <h1 style="color: var(--primary-blue); margin-top: 0; font-size: 26pt; border-bottom: 3px solid var(--accent-red); padding-bottom: 10px; font-family: 'Montserrat', sans-serif;">Technical Data (Cont.)</h1>
+
+            <div style="background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 8pt; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th colspan="7" style="background: var(--primary-blue); color: white; padding: 8px; font-size: 10pt; border-bottom: 1px solid white;">Maximum Total Losses Upto 22 kV Class Transformers</th>
+                        </tr>
+                        <tr>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; width: 40px;">Sl No.</th>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">Rating<br>(kVA)</th>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">Impedance<br>Z%</th>
+                            <th colspan="4" style="background: #f1f5f9; border-bottom: 1px solid #e2e8f0; padding: 4px;">Maximum Total Loss (W) AS PER IS - 1180-2014-PART-1</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">Energy Efficiency Level-1</th>
+                            <th colspan="2" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 4px;">Energy Efficiency Level-2</th>
+                        </tr>
+                        <tr>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">50% Load</th>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">100% Load</th>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">50% Load</th>
+                            <th style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 4px;">100% Load</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">16</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">142</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">462</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">126</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">420</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">200</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">667</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">184</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">625</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">3</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">63</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">357</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">1197</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">315</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">1103</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">100</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">499</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">1733</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">457</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">1575</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">5</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">160</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">704</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">2048</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">599</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">1785</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">200</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">819</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">2415</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">704</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">2205</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">7</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">250</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1029</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">3077</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">966</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">2835</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">8</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">315</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1076</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">3255</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1003</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">2888</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">9</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">400</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1286</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">3623</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1208</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">3497</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">10</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">500</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1586</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">4515</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1502</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">4305</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">11</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">630</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1953</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">5565</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1832</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">5093</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">12</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">800</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">2401</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">6722</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2254</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">6129</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">13</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1000</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">5.00</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">2930</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">8085</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2751</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">7350</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">14</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1250</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">5.00</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">3465</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">9660</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">3381</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">8820</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">15</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1600</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">4410</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">12390</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4169</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">11865</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">16</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2000</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">5303</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">15750</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">5030</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">14805</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">17</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2500</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">6458</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">19425</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6195</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">18375</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 8pt; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th colspan="7" style="background: var(--primary-blue); color: white; padding: 8px; font-size: 10pt; border-bottom: 1px solid white;">Maximum Total Losses Upto 33 kV Class Transformers</th>
+                        </tr>
+                        <tr>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; width: 40px;">Sl No.</th>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">Rating<br>(kVA)</th>
+                            <th rowspan="3" style="background: #f1f5f9; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">Impedance<br>Z%</th>
+                            <th colspan="4" style="background: #f1f5f9; border-bottom: 1px solid #e2e8f0; padding: 4px;">Maximum Total Loss (W) AS PER IS - 1180-2014-PART-1</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">Energy Efficiency Level-1</th>
+                            <th colspan="2" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 4px;">Energy Efficiency Level-2</th>
+                        </tr>
+                        <tr>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">50% Load</th>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">100% Load</th>
+                            <th style="background: #f8fafc; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">50% Load</th>
+                            <th style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 4px;">100% Load</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">16</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">145</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">473</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">129</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">430</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">204</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">683</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">188</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">640</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">3</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">63</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">366</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">1226</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">323</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">1129</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">100</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">511</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">1774</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">468</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">1613</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">5</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">160</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">720</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">2096</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">613</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">1828</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">200</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">839</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">2473</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">720</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">2258</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">7</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">250</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1054</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">3150</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">989</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">2903</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">8</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">315</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1102</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">3333</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1027</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">2956</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">9</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">400</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1317</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">3709</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1236</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">3508</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">10</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">500</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">1623</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">4623</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1537</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">4408</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">11</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">630</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">2000</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">5698</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1876</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">5214</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">12</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">800</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4.50</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">2459</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">6882</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2308</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">6275</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">13</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1000</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">5.00</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">2999</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">8278</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2817</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">7525</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">14</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1250</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">5.00</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">3548</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">9890</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">3462</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">9030</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">15</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">1600</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">4515</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">12685</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">4268</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">12148</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">16</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2000</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">5429</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">16125</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">5149</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">15575</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">17</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">2500</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6.25</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa;">6611</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px; background: #fafafa; font-weight: bold;">19888</td>
+                            <td style="border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 4px;">6343</td>
+                            <td style="border-bottom: 1px solid #e2e8f0; padding: 4px; font-weight: bold;">18813</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>        </div>
+    </div>
+        <!-- PAGE 7: TYPE TESTS & CERTIFICATES -->
+    <div class="page" style="background-color: white;">
+        <div class="content-container" style="padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column; align-items: center; height: 100%;">
+            <h2 style="color: var(--text-dark); margin: 0 0 30px 0; font-size: 24pt; font-family: 'Montserrat', sans-serif; font-weight: 500; text-align: center;">Type tests & Certificates</h2>
+            
+            <div style="flex: 1; width: 100%; display: flex; justify-content: center; align-items: center;">
+                <!-- Certificate Collage Layout Placeholders -->
+                <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; align-items: center; justify-content: center;">
+                    
+                    <!-- Top Row: 2 Certificates -->
+                    <div style="display: flex; justify-content: center; gap: 30px; width: 100%;">
+                        <div style="border: 4px solid #1e293b; background: white; display: flex; justify-content: center; align-items: center; padding: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 220px; height: 300px; transform: rotate(-2deg);">
+                            <img src="images/brochure/certificate_1.jpg" alt="ERTO Test Report" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="border: 4px solid #1e293b; background: white; display: flex; justify-content: center; align-items: center; padding: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 220px; height: 300px; transform: rotate(2deg);">
+                            <img src="images/brochure/certificate_2.jpg" alt="Contractor License" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+
+                    <!-- Middle Row: 1 Certificate - Logo - 1 Certificate -->
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 30px; width: 100%;">
+                        <div style="border: 4px solid #1e293b; background: white; display: flex; justify-content: center; align-items: center; padding: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 220px; height: 300px; transform: rotate(-3deg);">
+                            <img src="images/brochure/certificate_3.png" alt="Trade Marks Registry" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        
+                        <!-- CENTER: SG Enterprises Official Logo -->
+                        <div style="border: 2px solid #e2e8f0; background: white; display: flex; justify-content: center; align-items: center; padding: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.05); z-index: 10; width: 260px; height: 260px; border-radius: 12px;">
+                            <img src="images/brochure/sg_logo_full.png" alt="SG Enterprises Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+
+                        <div style="border: 4px solid #1e293b; background: white; display: flex; justify-content: center; align-items: center; padding: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 220px; height: 300px; transform: rotate(3deg);">
+                            <img src="images/brochure/certificate_4.png" alt="BIS Certificate" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+
+                    <!-- Bottom Row: 2 Certificates -->
+                    <div style="display: flex; justify-content: center; gap: 30px; width: 100%;">
+                        <div style="border: 4px solid #1e293b; background: white; display: flex; justify-content: center; align-items: center; padding: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 220px; height: 300px; transform: rotate(1deg);">
+                            <img src="images/brochure/certificate_5.png" alt="BIS Attachment" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="border: 4px solid #1e293b; background: white; display: flex; justify-content: center; align-items: center; padding: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 220px; height: 300px; transform: rotate(-1deg);">
+                            <img src="images/brochure/certificate_6.png" alt="Calibration Equipments" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PAGE 6: BACK COVER (SG ENTERPRISES) -->
+
+<div class="page" style="background-color: #2e3192;"> <!-- SG Dark Blue -->
+        <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50%; overflow: hidden;">
+            <!-- Large Half Circle Graphic -->
+            <div style="position: absolute; left: -300px; top: 50%; transform: translateY(-50%); width: 600px; height: 600px; border-radius: 50%; border: 15px solid white; display: flex; flex-direction: column; overflow: hidden;">
+                <img src="images/brochure/transformer.png" style="width: 100%; height: 33.33%; object-fit: cover; border-bottom: 5px solid #2e3192;">
+                <img src="images/brochure/manufacturing.png" style="width: 100%; height: 33.33%; object-fit: cover; border-bottom: 5px solid #2e3192;">
+                <img src="images/brochure/panel.png" style="width: 100%; height: 33.33%; object-fit: cover;">
+            </div>
+            
+            <!-- Logo Circle Overlap -->
+            <div style="position: absolute; left: 180px; top: 50%; transform: translateY(-50%); width: 140px; height: 140px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                <img src="images/brochure/sg_logo.png" style="width: 80%; object-fit: contain;">
+            </div>
+        </div>
+        
+        <div style="position: absolute; left: 45%; top: 45%; color: white; font-size: 24pt; font-weight: 700;">
+            एक नए रिश्ते की <br> शुरूआत
+        </div>
+        
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; background: white; padding: 20px 40px; border-radius: 40px 0 0 0; display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <img src="images/brochure/sg_logo.png" style="width: 180px; margin-bottom: 15px;">
+            <strong style="color: #2e3192; font-size: 9pt;">Power Distribution, Substation, Solar & Metering Project (Turnkey Basis)</strong>
+            <span style="font-size: 8pt; color: #4b5563; margin-top: 5px;">Head Office: Laxmi Tower, 5th Floor, Station Road, Deoghar (Jharkhand)-814112.</span>
+            <span style="font-size: 8pt; color: #4b5563;">Email: sgenenterprises66@gmail.com, info@sgenterprisessolar.com</span>
+            <span style="font-size: 8pt; color: #4b5563;">Website: www.sgenterprisessolar.com | Contact No.: +91 7004994974, 8637814027</span>
+        </div>
+    </div>
+
+</body>
+</html>
