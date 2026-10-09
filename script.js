@@ -38,3 +38,20 @@ document.getElementById('contactForm')?.addEventListener('submit', async (e) => 
   }
   btn.disabled = false;
 });
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isActive = item.classList.contains('active');
+    
+    document.querySelectorAll('.faq-item').forEach(faq => {
+      faq.classList.remove('active');
+      faq.querySelector('.icon').textContent = '+';
+    });
+    
+    if (!isActive) {
+      item.classList.add('active');
+      btn.querySelector('.icon').textContent = '−';
+    }
+  });
+});
